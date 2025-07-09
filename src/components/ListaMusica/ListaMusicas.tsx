@@ -20,14 +20,12 @@ type Musica = {
 };
 
 export default function ListaMusicas() {
-  // Estados
   const [musicas, setMusicas] = useState<Musica[]>([]);
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [tipoBusca, setTipoBusca] = useState<'todas' | 'artista' | 'album' | 'banda' | 'musico'>('todas');
   const [valorBusca, setValorBusca] = useState("");
 
-  // Buscar todos os dados
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -35,66 +33,65 @@ export default function ListaMusicas() {
 
       const musicasData = await fetchMusicas();
       setMusicas(musicasData);
-      
+
       if (musicasData.length === 0) {
         setErro("Nenhuma música encontrada");
       }
-
     } catch (error) {
+      console.error(error);
       setErro("Não foi possível carregar as músicas");
     } finally {
       setLoading(false);
     }
   };
 
-  // Buscar por filtro
   const buscarPorFiltro = async () => {
     if (!valorBusca.trim() && tipoBusca !== 'todas') return;
-    
+
     try {
       setLoading(true);
       setErro(null);
-      
+
       let musicasData: Musica[] = [];
-      
+
       if (tipoBusca === 'todas') {
         musicasData = await fetchMusicas();
       } else {
         switch (tipoBusca) {
-          case 'banda': 
+          case 'banda':
             musicasData = await fetchMusicasPorBanda(valorBusca);
             break;
-          case 'artista': 
+          case 'artista':
             musicasData = await fetchMusicasPorArtista(valorBusca);
             break;
-          case 'musico': 
+          case 'musico':
             musicasData = await fetchMusicasPorMusico(valorBusca);
             break;
-          case 'album': 
+          case 'album':
             musicasData = await fetchMusicasPorAlbum(valorBusca);
             break;
-          default: 
+          default:
             musicasData = await fetchBuscaMusica(valorBusca);
         }
       }
-      
+
       setMusicas(musicasData);
-      
+
       if (musicasData.length === 0) {
-        const mensagem = tipoBusca === 'todas' 
-          ? "Nenhuma música encontrada" 
-          : `Nenhuma música encontrada para ${tipoBusca}: ${valorBusca}`;
+        const mensagem =
+          tipoBusca === 'todas'
+            ? "Nenhuma música encontrada"
+            : `Nenhuma música encontrada para ${tipoBusca}: ${valorBusca}`;
         setErro(mensagem);
       }
-      
     } catch (error) {
+      console.error(error);
       setErro(`Não foi possível realizar a busca ${tipoBusca} : ${valorBusca}`);
     } finally {
       setLoading(false);
     }
   };
 
-  // Limpar busca
   const limparBusca = () => {
     setValorBusca("");
     setTipoBusca("todas");
@@ -107,7 +104,6 @@ export default function ListaMusicas() {
 
   return (
     <div className={styles.musicTheme}>
-      {/* Cabeçalho animado */}
       <div className={styles.stageHeader}>
         <h1 className={styles.title}>🎵 Catálogo Musical Completo</h1>
         <div className={styles.spotlight}></div>
@@ -120,13 +116,16 @@ export default function ListaMusicas() {
         </div>
       )}
 
-      {/* Controles de busca */}
       <div className={styles.musicControls}>
         <div className={styles.searchGroup}>
           <select
             className={styles.musicSelect}
             value={tipoBusca}
-            onChange={(e) => setTipoBusca(e.target.value as any)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setTipoBusca(
+                e.target.value as 'todas' | 'artista' | 'album' | 'banda' | 'musico'
+              )
+            }
           >
             <option value="todas">Todas as Músicas</option>
             <option value="banda">Por Banda</option>
@@ -142,7 +141,7 @@ export default function ListaMusicas() {
             onChange={(e) => setValorBusca(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && buscarPorFiltro()}
           />
-          
+
           <button
             className={`${styles.musicButton} ${styles.playButton}`}
             onClick={buscarPorFiltro}
@@ -154,9 +153,11 @@ export default function ListaMusicas() {
                 <span></span>
                 <span></span>
               </span>
-            ) : 'Buscar'}
+            ) : (
+              'Buscar'
+            )}
           </button>
-          
+
           {(valorBusca || tipoBusca !== 'todas') && (
             <button
               className={`${styles.musicButton} ${styles.stopButton}`}
@@ -169,17 +170,14 @@ export default function ListaMusicas() {
         </div>
       </div>
 
-      {/* Loading animado */}
       {loading && (
         <div className={styles.loadingContainer}>
           <div className={styles.vinylRecord}></div>
         </div>
       )}
 
-      {/* Seção de Conteúdo - Só mostra as músicas se não houver erro */}
       {!erro && (
         <main className={styles.mainContent}>
-          {/* Seção de Músicas */}
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>
               <span className={styles.emoji}>🎵</span> Músicas
@@ -205,13 +203,17 @@ export default function ListaMusicas() {
                         <span className={styles.detailIcon}>🎸</span> {musica.musico}
                       </p>
                       <p className={styles.musicDetail}>
-                        <span className={styles.detailIcon}>💿</span> 
+                        <span className={styles.detailIcon}>💿</span>{" "}
                         {musica.albuns?.join(", ") || "Nenhum álbum informado"}
                       </p>
                     </div>
                     <div className={styles.musicNotes}>
                       {[1, 2, 3].map((i) => (
-                        <div key={i} className={styles.note} style={{ animationDelay: `${i * 0.2}s` }}></div>
+                        <div
+                          key={i}
+                          className={styles.note}
+                          style={{ animationDelay: `${i * 0.2}s` }}
+                        ></div>
                       ))}
                     </div>
                   </div>
@@ -222,9 +224,11 @@ export default function ListaMusicas() {
         </main>
       )}
 
-      {/* Rodapé */}
       <footer className={styles.footer}>
-        <p>© {new Date().getFullYear()} Catálogo Musical - Todos os direitos reservados</p>
+        <p>
+          © {new Date().getFullYear()} Catálogo Musical - Todos os direitos
+          reservados
+        </p>
       </footer>
     </div>
   );

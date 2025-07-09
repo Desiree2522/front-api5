@@ -1,100 +1,66 @@
- export interface Musica 
-    {
-  id: number,
-  banda: string,
-  artista: string,
-  musico: string,
-  albuns: string[]
+// Tipo principal de uma música
+export interface Musica {
+  id: number;
+  banda: string;
+  artista: string;
+  musico: string;
+  albuns: string[];
 }
 
+// Response com lista de músicas + total
 export interface MusicaResponse {
   musicas: Musica[];
   total: number;
 }
 
- export interface MusicasPorAlbum
-    {
-  id: number,
-  banda: string,
-  artista: string,
-  musico: string,
-  albuns: string[]
-}
+// As buscas por Album, Banda, Artista, Musico, ou ID retornam uma música.
+// Evitamos duplicação usando alias.
+export type MusicaPorId = Musica;
+export type MusicasPorAlbum = Musica;
+export type MusicaPorBanda = Musica;
+export type MusicaPorArtista = Musica;
+export type MusicaPorMusico = Musica;
 
- export interface MusicaPorId
-    {
-  id: number,
-  banda: string,
-  artista: string,
-  musico: string,
-  albuns: string[]
-}
-
-export interface MusicaPorBanda
-    {
-  id: number,
-  banda: string,
-  artista: string,
-  musico: string,
-  albuns: string[]
-}
-
-export interface MusicaPorArtista
-    {
-  id: number,
-  banda: string,
-  artista: string,
-  musico: string,
-  albuns: string[]
-}
-
-export interface MusicaPorMusico
-    {
-  id: number,
-  banda: string,
-  artista: string,
-  musico: string,
-  albuns: string[]
-}
-// Utility type to avoid repetition for music-related interfaces
+// Tipo base para criação e atualização (sem id)
 export type MusicaBase = Omit<Musica, 'id'>;
 
-// Example: type for creating a new Musica (without id)
-export interface CreateMusica extends MusicaBase {}
 
-// Example: type for updating a Musica (partial fields, except id)
-// Example: type for updating a Musica (partial fields, except id)
+
+
+// Atualizar uma música (campos parciais + id obrigatório)
 export interface UpdateMusica extends Partial<MusicaBase> {
-    id: number;
+  id: number;
 }
-// Example: type for fetching a Musica by ID
+
+// Buscar música por ID
 export interface FetchMusicaById {
-    id: number;
-}   
-// Example: type for fetching Musicas by Banda
+  id: number;
+}
+
+// Buscar músicas por banda
 export interface FetchMusicasByBanda {
-    banda: string;
-}
-// Example: type for fetching Musicas by Artista
-export interface FetchMusicasByArtista {        
-    artista: string;
-}
-// Example: type for fetching Musicas by Musico
-export interface FetchMusicasByMusico {     
-    musico: string;
+  banda: string;
 }
 
-// Example: type for searching Musicas by name
-export interface SearchMusica {
-    nome: string;
+// Buscar músicas por artista
+export interface FetchMusicasByArtista {
+  artista: string;
 }
 
-// Example: type for fetching all Musicas
-export interface FetchAllMusicas {
-   
+// Buscar músicas por músico
+export interface FetchMusicasByMusico {
+  musico: string;
 }
 
-// Example: type for fetching Musicas by letra
+// Buscar músicas por letra inicial
 export interface FetchMusicasByLetra {
-    letra: string;
+  letra: string;
 }
+
+// Buscar músicas por nome
+export interface SearchMusica {
+  nome: string;
+}
+
+// Buscar todas as músicas
+export type FetchAllMusicas = object;
