@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌐 Route API- Música Brasileira Front-End
 
-## Getting Started
+Interface web para exploração, busca e cadastro de músicas brasileiras. Este projeto consome a MusicAlive API e permite que usuários descubram artistas, álbuns e composições, além de contribuir com informações sobre novas músicas.
 
-First, run the development server:
+>  💡 Desenvolvido como parte de um projeto full-stack com foco em experiência do usuário, performance e boas práticas modernas de front-end.
+
+---
+
+## 📸 Imagens do Projeto
+
+<div align="center">
+  <img src="/public/iPhone-13-PRO-localhost.png.png" width="600px" alt="Tela Catálogo de Músicas" />
+  <br />
+  <img src="/public/iPad-Mini-localhost.png.png" width="250px" alt="Tela Pesquisa" />
+  <img src="/public/iPhone-14-(iOS-16)-localhost.png.png" width="250px" alt="Sobre" />
+</div>
+
+---
+
+## 📚 O que foi aprendido
+
+
+- **Criação de landing pages dinâmicas** com Next.js e TypeScript
+- **Consumo de APIs REST** com `fetch` e `useEffect`
+- **Componentização e boas práticas** em React
+- **Tailwind CSS avançado**: responsividade, dark mode, animações
+- **Scroll suave** para navegação entre seções
+- **Acessibilidade e SEO**
+
+---
+
+## 🛠️ Como executar o projeto
+
+1. **Clone o repositório:**
+
+```bash
+git clone https://github.com/Desiree2522/front-api5.git
+cd front-api5
+```
+
+2. **Instale as dependências:**
+
+```bash
+npm install
+
+
+```
+
+3. **Execute o projeto em ambiente de desenvolvimento:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O projeto estará disponível em: [http://localhost:3000](http://localhost:3000/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔗 Recursos Úteis
 
-## Learn More
+- 🔌 **API utilizada:** [Projeto---API - GitHub](https://github.com/Desiree2522/Projeto---API)
 
-To learn more about Next.js, take a look at the following resources:
+- 🔌 **API utilizada na Render:** [projeto-apiminip4](https://projeto-apiminip4.onrender.com)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Funcionalidade - Lista de Músicas
 
-## Deploy on Vercel
+O componente **`ListaMusicas`** é responsável por listar, buscar e filtrar músicas brasileiras consumindo diferentes rotas da API.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ✅ O que ele faz
+
+- Exibe todas as músicas cadastradas ao carregar a página.
+- Permite buscar músicas por **artista, banda, músico ou álbum** através de filtros dinâmicos.
+- Mostra um **loading animado** durante a busca.
+- Exibe mensagens amigáveis de erro ou de “nenhum resultado encontrado”.
+- Permite **limpar filtros** com apenas um clique.
+- Usa animações, ícones e efeitos visuais para melhorar a experiência do usuário.
+
+---
+
+### ⚙️ Tecnologias e recursos utilizados
+
+- **React Hooks** (`useState`, `useEffect`) para controle de estados e ciclo de vida do componente.
+- **Fetch assíncrono** para requisição dos dados da API.
+- **Tailwind CSS** e **CSS Modules** para estilização responsiva e customizada.
+- **Componentização** e separação clara da lógica de busca e exibição.
+- **Acessibilidade e usabilidade**, incluindo navegação por teclado.
+
+---
+
+### 📌 Fluxo de uso
+
+1. Ao abrir a página, todas as músicas disponíveis são carregadas automaticamente.
+2. O usuário seleciona o filtro desejado no menu suspenso (Por Artista, Banda, Músico, Álbum ou Todas).
+3. Digita o termo de busca e pressiona **Enter** ou clica em **Buscar**.
+4. O sistema consulta a API e exibe os resultados na grade de músicas.
+5. Caso nenhum resultado seja encontrado, uma mensagem de feedback é mostrada.
+6. O botão **Limpar** remove filtros e recarrega todas as músicas cadastradas.
+
+---
+
+## 🏷️ Tópicos
+
+- `front-end`
+- `nextjs`
+- `música-brasileira`
+
+---
+
+## 🙋🏾‍♂️ Sobre
+
+A Música Brasileira representa uma das expressões culturais mais ricas do mundo, reunindo ritmos, histórias e tradições que atravessam gerações. Ter uma plataforma organizada e acessível para reunir essas informações contribui não apenas para a preservação da memória musical, mas também para facilitar a educação e a pesquisa cultural. Este projeto fortalece o vínculo entre estudantes, educadores e o vasto patrimônio musical do país, estimulando o interesse por nossa identidade artística.
+
+> "O front-end foi desenvolvido com foco em leveza, clareza e acessibilidade, refletindo a riqueza, a diversidade e a importância cultural da música brasileira."
