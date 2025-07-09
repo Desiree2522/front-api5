@@ -1,0 +1,10 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* Importing Google Fonts */
+
+/*@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+body, html {
+  font-family: 'Montserrat', sans-serif;
+}*/
