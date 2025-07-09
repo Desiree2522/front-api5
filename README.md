@@ -9,7 +9,7 @@ Interface web para exploração, busca e cadastro de músicas brasileiras. Este 
 ## 📸 Imagens do Projeto
 
 <div align="center">
-  <img src="/public/musica3.png" width="600px" alt="Tela Catálogo de Músicas" />
+  <img src="/public/musica3.png" width="350px" alt="Tela Catálogo de Músicas" />
   <br />
   <img src="/public/musica4.png" width="250px" alt="Tela Pesquisa" />
   <img src="/public/musica5.png" width="250px" alt="Sobre" />
